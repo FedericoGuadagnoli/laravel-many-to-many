@@ -32,7 +32,7 @@
                 <small class="text-muted">Incolla l'url del link a github</small>
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-3">
             <label for="type_id" class="form-label">Tipi di progetto</label>
             <select class="form-select bg-dark text-light" name="type_id" id="type_id" value="{{ old('type_id', $project->type_id) }}">
                 <option hidden value="">Scegli una tipologia ↓</option>
@@ -40,6 +40,21 @@
                     <option @if ($project->type_id == $type->id) selected @endif value="{{ $type->id }}">{{ $type->label }}</option>
                 @endforeach
             </select>
+        </div>
+    </div>
+    <div class="row">    
+        <div class="col-md-12">
+            <h4>Linguaggi usati</h4>
+            @foreach ($techs as $tech)
+            <div class="form-check form-check-inline">
+                <input type="checkbox" class="form-check-input bg-dark text-light" name="techs[]" id="tag-{{ $loop->iteration }}" value="{{ $tech->id }}"
+                 @if (in_array($tech->id, old('techs', $project_technologies ?? []))) checked @endif>
+                <label for="type_id" class="form-check-label" for="tag-{{ $loop->iteration }}">{{ $tech->label }}</label>
+            </div>
+            @endforeach
+            @error('techs')
+                <small class="text-danger">{{ $message }}</small>
+            @enderror
         </div>
     </div>
 
