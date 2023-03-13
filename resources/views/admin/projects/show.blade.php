@@ -15,6 +15,14 @@
           <figure class="text-center">
               <img src="{{ asset('storage/' . $project->image) }}" class="card-img-bottom img-fluid w-50" alt="{{ $project->title }}">
           </figure>
+          <div>
+            <h3 class="text-center">Linguaggi utilizzati</h3>
+            <div class="d-flex justify-content-center gap-5">
+                @foreach ($project->technologies as $tech)
+                <p class="bg-{{ $tech->color }} fs-5 rounded px-3 py-1">{{ $tech->label }}</p>              
+                @endforeach
+            </div>
+          </div>
         </div>
         <div class="w-100 d-flex justify-content-center align-items-center py-3 gap-3">
             <a href="{{ route('admin.projects.index') }}" class="btn btn-primary"><i class="fas fa-pencil me-2"></i>Indietro</a>
